@@ -1,43 +1,43 @@
 #include "ll.h"
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h> // For strcmp
 // Driver program to run the BST
 int main()
 {
-    nodeLL* ll=NULL;
-    nodeLL* ll1=NULL;
-    char data[1000];
-    int nodeLimit,loopIterator;
-    printf("Enter the root node value to create a linked list instance\n");
-    scanf("%s",data);
-    // Create an instance of linked list
-    ll=insertNodeAtEndLL(ll, &data, sizeof(data));
-    printf("How many more nodes you want to enter in linked list?\n");
-    scanf("%d",&nodeLimit);
-    for(loopIterator=0;loopIterator<nodeLimit;loopIterator++){
-        scanf("%s",data);
-        // Push more data to binary search tree
-        ll=insertNodeAtEndLL(ll,&data,sizeof(data));
+    nodeLL *ll = NULL;
+    while(1) {
+        char s[100];
+        printf("\nPlease enter choices: \n1. Insert node at beginning. \n2. Insert node at end. \n3. Delete node from beginning. \n4. Display. \n5. Exit. \n\n");
+        scanf("%s", s);
+
+        // If user chooses Exit, then terminate while loop.
+        if(strcmp(s, "1") == 0) {
+          char data[100];
+          printf("Please enter value: ");
+          scanf("%s", data);
+          ll = insertNodeAtBegLL(ll, &data, sizeof(data));
+        }
+        else if(strcmp(s, "2") == 0) {
+          char data[100];
+          printf("Please enter value: ");
+          scanf("%s", data);
+          ll = insertNodeAtEndLL(ll, &data, sizeof(data));
+        }
+        else if(strcmp(s, "3") == 0) {
+          ll = deleteNodeAtBegLL(ll);
+        }
+        else if(strcmp(s, "4") == 0) {
+          printf("------------------------------\n");
+          displayCharLL(ll);
+          printf("\n------------------------------\n");
+        }
+        else if(strcmp(s, "5") == 0) {
+          break;
+        }
+        else {
+          printf("Please enter correct choice.\n");
+        }
     }
-    /* Write Code here to test the various funtions for BST */
-    printf("Linked list traversal:ll\n");
-    displayCharLL(ll);
-    printf("\n");
-    int arr[] = {1, 2, 3, 4, 5, 6};
-    for(int index = 0; index < sizeof(arr) / sizeof(int); ++index) {
-      ll1 = insertNodeAtBegLL(ll1, &arr[index], sizeof(arr[index]));
-    }
-    printf("Linked list traversal:ll1\n");
-    displayIntLL(ll1);
-    printf("\nDelete first node from each\n");
-    ll=deleteNodeAtBegLL(ll);
-    ll1=deleteNodeAtBegLL(ll1);
-    printf("Linked list traversal:ll\n");
-    displayCharLL(ll);
-    printf("\n");
-    printf("Linked list traversal:ll1\n");
-    displayIntLL(ll1);
-    printf("\n");
-    /*                                                      */
     return 0;
 }
